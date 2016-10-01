@@ -36,8 +36,7 @@ function uploadBuf(uptoken, release, content, file, callback) {
                 ' failUploadQiniu - '.green.bold +
                 time.grey + ' ' + 
                 subpath.replace(/^\//, '') +
-                ' >> '.yellow.bold +
-               	ret.key + '\n'
+               	'\n'
             );
             console.log('error:', err);
             callback(err);
@@ -86,7 +85,14 @@ module.exports = function(options, modified, total, callback, next) {
 			      	if (!--reTryCount) {
 			        	throw new Error(error);
 			      	} else {
-			        	_upload();
+				var time = '[' + fis.log.now(true) + ']';
+				process.stdout.write(
+						'#' + reTryCount + ' retryuploadQiniu - '.green.bold +
+						time.grey + ' ' + 
+						file.subpath.replace(/^\//, '') +
+						'\n'
+						); 					
+				_upload();
 			      	}
 			    } else {
 			      	next(); //由于是异步的如果后续还需要执行必须调用 next
