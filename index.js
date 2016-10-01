@@ -5,6 +5,7 @@
 // 引入七牛 Node.js SDK
 var qiniu = require('qiniu');
 
+qiniu.conf.UP_HOST = 'http://up-z1.qiniu.com';
 /**
  * 生成上传凭证并返回
  */
